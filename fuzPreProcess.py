@@ -4,7 +4,7 @@ from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import utils
 
-df = pd.read_csv('C:/Users/misl7603/Desktop/Scripts/Fuzz/desc_data.csv')
+df = pd.read_csv('desc_data.csv')
 print(df)
 #df_clean = df.drop_duplicates(subset=['Description']) Oops I didn't want to do that
 
