@@ -3,16 +3,35 @@ import pandas as pd
 from fuzzywuzzy import process
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import utils
+import nltk
 
-df = pd.read_csv('desc_data.csv')
-print(df)
+#nltk.download('stopwords')
+
+csv_file = 'C:/desc_data.csv'
+out_file = 'C:/output.csv'
+
+df = pd.read_csv(csv_file)
+
 #df_clean = df.drop_duplicates(subset=['Description']) Oops I didn't want to do that
 
-df_clean =  df['Description'].str.replace('disc code|do not use|discountinued', '', 
-                                          regex=True, case=False)
+#df['Description'] =  df['Description'].str.replace('disc code|do not use|discountinued','')
+#RegEx = '|'.join(r'\b(?:{})\b'.format(x) for x in stop_words)
 
-print(df_clean)
+#print(RegEx)
+#df['Description_1'] = df['Description'].str.replace(RegEx,' ', regex=True)
 
+#new_words = set(stop_words)
+#format = lambda x: ' '.join(w for w in x.split() if not w in stop_words)
+#df['Description_2'] = df['Description'].apply(format)
+
+
+stop_words = ["DISC CODE","do not use","discontinued","discountinued","DO NOT USE",]
+
+
+pat = r'\b(?:{})\b'.format('|'.join(stop_words))
+df['Out'] = df['Description'].str.replace(pat, '')
+df['Out'] = df['Out'].str.replace(r'\s+', ' ')
+#df['Out'].to_csv(out_file, sep='\t', encoding='utf-8')
 
 _list = []
 
